@@ -86,6 +86,7 @@ public class StaffServiceImpl implements StaffService{
      * @param staff : data of request
      * @return : newly created staff
      */
+    @Transactional
     @Override
     public ResponseEntity<StaffDTO> createStaff(StaffDAO staff) {
         StaffDTO staffDTO;

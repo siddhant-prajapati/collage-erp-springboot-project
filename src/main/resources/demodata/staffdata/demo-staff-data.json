@@ -1,0 +1,122 @@
+[
+  {
+    "staffId": 1,
+    "staffName": "Dr. Rajesh Patel",
+    "profilePic": "staff-53.jpg",
+    "department": "Computer",
+    "mobileNo": "9876543210",
+    "address": "Rajkot, Gujarat",
+    "email": "rajesh.patel@example.com",
+    "password": "Rajesh@12",
+    "degree": "PhD in Computer Science",
+    "specialization": [
+      "Data Structures",
+      "Algorithms",
+      "Distributed Systems"
+    ],
+    "experience": "10 years",
+    "attendance": 95
+  },
+  {
+    "staffId": 2,
+    "staffName": "Prof. Anjali Sharma",
+    "profilePic": "staff-52.jpg",
+    "department": "IT",
+    "mobileNo": "9123456789",
+    "address": "Ahmedabad, Gujarat",
+    "email": "anjali.sharma@example.com",
+    "password": "Anjali@12",
+    "degree": "M.Tech in IT",
+    "specialization": [
+      "Cloud Computing",
+      "DevOps"
+    ],
+    "experience": "7 years",
+    "attendance": 92
+  },
+  {
+    "staffId": 3,
+    "staffName": "Dr. Kunal Mehta",
+    "profilePic": "staff-54.jpg",
+    "department": "Mechanical",
+    "mobileNo": "9012345678",
+    "address": "Surat, Gujarat",
+    "email": "kunal.mehta@example.com",
+    "password": "Kunal@123",
+    "degree": "PhD in Mechanical Engineering",
+    "specialization": [
+      "Thermodynamics",
+      "Fluid Mechanics"
+    ],
+    "experience": "12 years",
+    "attendance": 88
+  },
+  {
+    "staffId": 4,
+    "staffName": "Prof. Neha Gupta",
+    "profilePic": "staff-152.webp",
+    "department": "Electrical",
+    "mobileNo": "9988776655",
+    "address": "Vadodara, Gujarat",
+    "email": "neha.gupta@example.com",
+    "password": "Neha@1234",
+    "degree": "M.Tech in Electronics",
+    "specialization": [
+      "VLSI Design",
+      "Embedded Systems"
+    ],
+    "experience": "6 years",
+    "attendance": 90
+  },
+  {
+    "staffId": 5,
+    "staffName": "Dr. Amit Verma",
+    "profilePic": "staff-103.jpeg",
+    "department": "Civil",
+    "mobileNo": "9871234567",
+    "address": "Jamnagar, Gujarat",
+    "email": "amit.verma@example.com",
+    "password": "Amit@1234",
+    "degree": "PhD in Civil Engineering",
+    "specialization": [
+      "Structural Engineering",
+      "Construction Management"
+    ],
+    "experience": "11 years",
+    "attendance": 87
+  },
+  {
+    "staffId": 6,
+    "staffName": "Prof. Ritu Shah",
+    "profilePic": "staff-153.webp",
+    "department": "Computer",
+    "mobileNo": "9765432109",
+    "address": "Bhavnagar, Gujarat",
+    "email": "ritu.shah@example.com",
+    "password": "Ritu@1234",
+    "degree": "M.Sc Computer Science",
+    "specialization": [
+      "Machine Learning",
+      "Artificial Intelligence"
+    ],
+    "experience": "8 years",
+    "attendance": 93
+  },
+  {
+    "staffId": 7,
+    "staffName": "Prof. Mayank Shah",
+    "profilePic": "staff-153.jpg",
+    "department": "Chemical",
+    "mobileNo": "9765432109",
+    "address": "Bhavnagar, Gujarat",
+    "email": "mayank.shah@example.com",
+    "password": "Mayank@12",
+    "degree": "M.Sc Chemical Engineering",
+    "specialization": [
+      "Machine Learning",
+      "Artificial Intelligence"
+    ],
+    "experience": "8 years",
+    "attendance": 93
+  }
+]

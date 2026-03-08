@@ -9,6 +9,7 @@ import com.collage.collageerp.model.SignUpRequest;
 import com.collage.collageerp.repository.StudentRepository;
 import com.collage.collageerp.utils.StudentUtil;
 import com.collage.collageerp.utils.StudentValidation;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +90,7 @@ public class StudentServiceImpl implements StudentService {
      * @param student : request from client
      * @return : data of new created student
      */
+    @Transactional
     @Override
     public ResponseEntity<StudentDTO> createStudent(StudentDAO student) {
         StudentDTO studentDTO;
@@ -151,6 +153,7 @@ public class StudentServiceImpl implements StudentService {
      * @param id : studentId
      * @return status code
      */
+    @Transactional
     @Override
     public ResponseEntity<StudentDTO> deleteStudent(int id) {
         logger.info("Id is : {}", id);
