@@ -4,13 +4,16 @@ import com.collage.collageerp.DAO.StaffDAO;
 import com.collage.collageerp.DAO.StudentDAO;
 import com.collage.collageerp.DTO.StaffDTO;
 import com.collage.collageerp.DTO.StudentDTO;
+import com.collage.collageerp.Services.AdminService;
 import com.collage.collageerp.Services.StaffService;
 import com.collage.collageerp.Services.StudentService;
+import com.collage.collageerp.model.Admin;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -30,10 +33,29 @@ public class DemoDataSetup {
     @Autowired
     private StaffService staffService;
 
+    @Autowired
+    private AdminService adminService;
+
+    @Value("${spring.admin.username}")
+    private String adminUsername;
+
+    @Value("${spring.admin.password}")
+    private String password;
+
     @PostConstruct
     public void setupProject() throws IOException {
+        setupAdmin();
         setupDemoStudent();
         setupDemoStaff();
+    }
+
+    public void setupAdmin() throws IOException {
+        ResponseEntity<Admin> admins = adminService.findByEmail(adminUsername);
+        if (!admins.getStatusCode().is2xxSuccessful()) {
+            Admin admin = new Admin(1, "", adminUsername, password, "admin");
+            adminService.createAdmin(admin);
+            log.info("admin created successfully");
+        }
     }
 
     public void setupDemoStudent() throws IOException {

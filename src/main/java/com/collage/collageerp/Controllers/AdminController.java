@@ -21,6 +21,11 @@ public class AdminController {
     return this.adminService.findAdminById(id);
   }
 
+  @GetMapping("/get/all")
+  public ResponseEntity<Admin> getAdminByEmail(@PathVariable("email") String email){
+    return this.adminService.findByEmail(email);
+  }
+
   @PostMapping("/new")
   public ResponseEntity<Admin> createNew(@RequestBody Admin admin){
     return this.adminService.createAdmin(admin);
