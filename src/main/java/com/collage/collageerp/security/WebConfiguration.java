@@ -45,14 +45,7 @@ public class WebConfiguration {
 
     http
         //disable cors(cross origin resource sharing) so we can easily use this api with other application
-            .cors(cors -> cors.configurationSource(request -> {
-              var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-              corsConfig.setAllowedOrigins(List.of("*"));
-              corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-              corsConfig.setAllowedHeaders(List.of("*"));
-              corsConfig.setAllowCredentials(true);
-              return corsConfig;
-            }))
+         .cors(cors -> cors.disable())
         //we can use this api in postman instead of fill form in browser
         .csrf(csrf -> csrf.disable())
         //manage session as stateless
