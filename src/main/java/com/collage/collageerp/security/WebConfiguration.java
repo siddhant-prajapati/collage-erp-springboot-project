@@ -47,7 +47,7 @@ public class WebConfiguration {
         //disable cors(cross origin resource sharing) so we can easily use this api with other application
             .cors(cors -> cors.configurationSource(request -> {
               var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-              corsConfig.setAllowedOrigins(List.of("https://collage-erp-angular-front-end.onrender.com"));
+              corsConfig.setAllowedOrigins(List.of("*"));
               corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
               corsConfig.setAllowedHeaders(List.of("*"));
               corsConfig.setAllowCredentials(true);
