@@ -14,6 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -41,8 +45,14 @@ public class WebConfiguration {
 
     http
         //disable cors(cross origin resource sharing) so we can easily use this api with other application
-        .cors()
-        .and()
+            .cors(cors -> cors.configurationSource(request -> {
+              var corsConfig = new org.springframework.web.cors.CorsConfiguration();
+              corsConfig.setAllowedOrigins(List.of("https://collage-erp-angular-front-end.onrender.com"));
+              corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+              corsConfig.setAllowedHeaders(List.of("*"));
+              corsConfig.setAllowCredentials(true);
+              return corsConfig;
+            }))
         //we can use this api in postman instead of fill form in browser
         .csrf(csrf -> csrf.disable())
         //manage session as stateless
@@ -104,5 +114,19 @@ public class WebConfiguration {
         .passwordEncoder(passwordEncoder())
         .and().build();
 
+  }
+
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+    return new WebMvcConfigurer() {
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
+      }
+    };
   }
 }

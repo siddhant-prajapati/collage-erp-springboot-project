@@ -44,8 +44,6 @@ public class DemoDataSetup {
 
     @PostConstruct
     public void setupProject() throws IOException {
-        System.out.println("Host : "+ System.getenv("DB_HOST"));
-        System.out.println("Port : "+ System.getenv("DB_PORT"));
         setupAdmin();
         setupDemoStudent();
         setupDemoStaff();
