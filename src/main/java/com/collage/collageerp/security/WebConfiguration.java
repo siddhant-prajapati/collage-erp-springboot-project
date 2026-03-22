@@ -45,7 +45,8 @@ public class WebConfiguration {
 
     http
         //disable cors(cross origin resource sharing) so we can easily use this api with other application
-         .cors(cors -> cors.disable())
+            .cors()
+            .and()
         //we can use this api in postman instead of fill form in browser
         .csrf(csrf -> csrf.disable())
         //manage session as stateless
@@ -115,7 +116,7 @@ public class WebConfiguration {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins("https://collage-erp-angular-front-end.onrender.com","http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

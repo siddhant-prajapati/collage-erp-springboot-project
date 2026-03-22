@@ -26,31 +26,35 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private final JwtToPrincipalConverter jwtToPrincipalConverter;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request,
+                                  HttpServletResponse response,
+                                  FilterChain filterChain)
+          throws ServletException, IOException {
 
-    response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE, PATCH");
-    response.setHeader("Access-Control-Max-Age", "3600");
-    response.setHeader("Access-Control-Allow-Headers",
-        "Accept-Encoding, origin, content-type, accept, token, x-auth-token, Access-Control-Allow-Origin, " +
-            "Access-Control-Allow-Methods, Access-Control-Max-Age, Access-Control-Allow-Headers, " +
-            "Content-Language, Content-Length, Keep-Alive, Authorization");
+    // ✅ Allow preflight requests (VERY IMPORTANT)
+    if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+      response.setStatus(HttpServletResponse.SC_OK);
+      filterChain.doFilter(request, response);
+      return;
+    }
 
-    //System.out.println("Request is = " + response.getHeader("Authorization"));
-    log.info("Response is = " + response);
+    // Extract token
+    Optional<String> tokenOpt = extractTokenFromRequest(request);
 
+    if (tokenOpt.isPresent()) {
+      try {
+        var jwt = jwtDecoder.decode(tokenOpt.get());
+        var principal = jwtToPrincipalConverter.convert(jwt);
+        var authentication = new UserPrincipalAuthenticationToken(principal);
 
-    extractTokenFromRequest(request)
-        .map(jwtDecoder::decode)   // same as .map(str -> jwtDecoder.decode())
-        .map(jwtToPrincipalConverter::convert) // calling convert() method
-        .map(UserPrincipalAuthenticationToken::new) //generate new object of class UserPrincipalAuthenticationToken
-        .ifPresent(     // check if token is present or not
-            authentication -> SecurityContextHolder
-              .getContext()
-              .setAuthentication(authentication)
-        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+      } catch (Exception e) {
+        log.error("JWT error: {}", e.getMessage());
+      }
+    }
 
-    filterChain.doFilter(request, response); //implement filter
+    // ✅ Always continue filter chain
+    filterChain.doFilter(request, response);
   }
 
   /**
